@@ -2,6 +2,7 @@ import { TouchableOpacity, TouchableOpacityProps, ImageBackground, ImageSourcePr
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
 import { THEME } from '../../theme';
+import React from 'react';
 
 export interface GameCardProps {
   id: string;
