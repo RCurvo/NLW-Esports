@@ -3,39 +3,54 @@ import { useEffect, useState } from 'react';
 import { Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import LogoImg from '../../assets/logo-nlw-esports.png'
+import { Background } from '../../components/Background';
 import { GameCard, GameCardProps } from '../../components/GameCard';
 import { Heading } from '../../components/Heading';
 import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native'
+
+
 
 export function Home() {
   const [games, setGames] = useState<GameCardProps[]>([])
 
+  const navigation = useNavigation()
+
+  function handleOpenGame({ id, title, bannerUrl }: GameCardProps) {
+    navigation.navigate('game', { id, title, bannerUrl })
+  }
+
+
   useEffect(() => {
-    fetch("http://192.168.15.10:3333/games")
+
+    fetch("http://192.168.15.11:3333/games")
       .then(response => response.json())
       .then(data => setGames(data))
   }, [])
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Image source={LogoImg}
-        style={styles.logo}
-      />
-      <Heading title="Econtre o seu duo!" subtitle="Selecione o game que deseja jogar..." />
+    <Background>
+      <SafeAreaView style={styles.container}>
+        <Image source={LogoImg}
+          style={styles.logo}
+        />
+        <Heading title="Econtre o seu duo!" subtitle="Selecione o game que deseja jogar..." />
 
-      <FlatList
-        contentContainerStyle={styles.contentList}
-        data={games}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <GameCard
-            data={item}
-          />
-        )}
-        showsHorizontalScrollIndicator={false}
-        horizontal
+        <FlatList
+          contentContainerStyle={styles.contentList}
+          data={games}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <GameCard
+              data={item}
+              onPress={() => handleOpenGame(item)}
+            />
+          )}
+          showsHorizontalScrollIndicator={false}
+          horizontal
 
-      />
-    </SafeAreaView>
+        />
+      </SafeAreaView>
+    </Background>
   );
 }
