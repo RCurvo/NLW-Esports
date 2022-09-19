@@ -1,8 +1,8 @@
 import express, { request, response } from 'express';
-import {PrismaClient} from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 import cors from 'cors'
 import { convertHourStringToMinutes } from './utils/convert-hour-string-to-minutes';
-import {convertMinutesToHourString} from './utils/convert-minutes-to-hour-string'
+import { convertMinutesToHourString } from './utils/convert-minutes-to-hour-string'
 
 const app = express()
 
@@ -50,8 +50,8 @@ app.post('/games/:id/ads', async (request, response) => {
     return response.status(201).json(ad);
 })
 
-app.get("/games/:id/ads", async (request, response)=> {
-    const gameId = request.params.id 
+app.get("/games/:id/ads", async (request, response) => {
+    const gameId = request.params.id
     const ads = await prisma.ad.findMany({
         select: {
             id: true,
@@ -81,11 +81,11 @@ app.get("/games/:id/ads", async (request, response)=> {
     }))
 })
 
-app.get("/ads/:id/discord",  async (request, response)=> {
-    const adId = request.params.id  
+app.get("/ads/:id/discord", async (request, response) => {
+    const adId = request.params.id
     const ad = await prisma.ad.findUniqueOrThrow({
-        select:{
-            discord:true
+        select: {
+            discord: true
         },
         where: {
             id: adId
