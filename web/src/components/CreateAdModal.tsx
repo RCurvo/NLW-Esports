@@ -26,7 +26,9 @@ export function CreateAdModal() {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement)
         const data = Object.fromEntries(formData);
-
+        if (!data.name) {
+            return
+        }
 
         try {
             await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
