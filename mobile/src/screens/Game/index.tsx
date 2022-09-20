@@ -10,10 +10,12 @@ import { Entypo } from '@expo/vector-icons'
 import { THEME } from '../../theme';
 import { Heading } from '../../components/Heading';
 import { DuoCard, DuoCardProps } from '../../components/DuoCard';
+import { DuoMatch } from '../../components/DuoMatch';
 
 
 export function Game() {
     const [duos, setDuos] = useState<DuoCardProps[]>([])
+    const [discordDuoSelected, setDiscordDuoSelected] = useState('dsadsad')
 
     const navigation = useNavigation()
     const route = useRoute();
@@ -73,7 +75,11 @@ export function Game() {
                     )}
                 />
 
-
+                <DuoMatch
+                    onClose={() => setDiscordDuoSelected('')}
+                    visible={discordDuoSelected.length > 0}
+                    discord="rodrigo#3232"
+                />
             </SafeAreaView>
         </Background>
     );
