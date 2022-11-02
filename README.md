@@ -6,3 +6,6 @@ Esse projeto foi feito em três partes usando o React, estilos com Tailwind, Rad
 
 # React Native
 Feito utilizando o Native-base e Expo, permite que o usuário encontre o anúncio de outros jogadores filtrando pelo jogo desejado
+
+# Backend
+Backend usando Express, SQLite, e Prisma. CRUD básico. Servindo dados para dois front-ends diferentes.
